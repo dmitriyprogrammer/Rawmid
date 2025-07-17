@@ -27,11 +27,11 @@ import 'package:rawmid/utils/helper.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:rawmid/utils/notifications.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'firebase_options.dart';
+// import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Future.delayed(Duration(seconds: 4), () {
     NotificationsService.start();
   });

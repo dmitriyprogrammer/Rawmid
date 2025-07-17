@@ -25,7 +25,7 @@ dependencies:
   speech_to_text: ^7.0.0
   webview_flutter: ^4.10.0
   webview_flutter_wkwebview: ^3.18.5
-  intl: ^0.19.0
+  intl: ^0.20.2
   geolocator: ^13.0.2
   phone_form_field: ^10.0.4
   flutter_html: ^3.0.0-beta.2

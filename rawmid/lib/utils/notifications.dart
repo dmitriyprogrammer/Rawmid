@@ -7,12 +7,12 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rawmid/controller/navigation.dart';
 import 'package:rawmid/utils/helper.dart';
 import '../api/home.dart';
-import '../firebase_options.dart';
+// import '../firebase_options.dart';
 import 'package:get/get.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   NotificationsService().handleNavigation(message.data);
 }
 
