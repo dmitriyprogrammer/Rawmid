@@ -4,10 +4,16 @@ Flutter-приложение **Rawmid**
 
 ---
 
+### Клонирование
+
+git clone https://github.com/dmitriyprogrammer/Rawmid.git
+
+---
+
 ### Установка зависимостей
 
 ```bash
-cd путь/к//проекту
+cd Rawmid/rawmid
 flutter pub get
 ```
 
