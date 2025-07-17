@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1069701810864",
+    "project_id": "rawmid-app",
+    "storage_bucket": "rawmid-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069701810864:android:833368023f04b854ea0975",
+        "android_client_info": {
+          "package_name": "com.rawmid.rawmid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtOiSvmMIRtIc4v3H6nW4fmjGZ7Bit-F8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

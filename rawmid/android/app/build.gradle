@@ -1,0 +1,46 @@
+plugins {
+    id "com.android.application"
+    id 'com.google.gms.google-services'
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.rawmid.rawmid"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        manifestPlaceholders = [
+                YANDEX_CLIENT_ID: "f9b68e69aabb4dcd90720917835dbd7c",
+        ]
+        applicationId = "com.rawmid.rawmid"
+        minSdk = 24
+        targetSdk = flutter.targetSdkVersion
+        versionCode = 2
+        versionName = flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    implementation 'com.yandex.android:maps.mobile:4.6.1-full'
+}
