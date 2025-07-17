@@ -6,7 +6,9 @@ Flutter-приложение **Rawmid**
 
 ### Клонирование
 
+```
 git clone https://github.com/dmitriyprogrammer/Rawmid.git
+```
 
 ---
 
