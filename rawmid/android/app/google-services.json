@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1069701810864",
-    "project_id": "rawmid-app",
-    "storage_bucket": "rawmid-app.firebasestorage.app"
+    "project_number": "904610130642",
+    "project_id": "dmitrii-415c9",
+    "storage_bucket": "dmitrii-415c9.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1069701810864:android:833368023f04b854ea0975",
+        "mobilesdk_app_id": "1:904610130642:android:ea0b61efc7795bd69bdb0b",
         "android_client_info": {
           "package_name": "com.rawmid.rawmid"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAtOiSvmMIRtIc4v3H6nW4fmjGZ7Bit-F8"
+          "current_key": "AIzaSyAqxbydKsAKxcU-Q1tiisFR7wnYJc-7NEA"
         }
       ],
       "services": {
