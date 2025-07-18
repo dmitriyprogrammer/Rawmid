@@ -16,6 +16,9 @@ git clone https://github.com/dmitriyprogrammer/Rawmid.git
 
 ```bash
 cd Rawmid/rawmid
+```
+
+```bash
 flutter pub get
 ```
 
