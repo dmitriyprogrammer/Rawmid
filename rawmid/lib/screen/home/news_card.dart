@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:rawmid/utils/constant.dart';
+import 'package:rawmid/utils/moderate_status.dart';
 import '../../controller/news.dart';
 import '../../model/home/news.dart';
 import '../../widget/h.dart';
@@ -20,24 +21,24 @@ class NewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final moderate = (news.status ?? 0);
+    final moderate = ModerateStatus(news.moderate);
 
     return GestureDetector(
       onTap: () {
-        if (moderate == 0 || moderate == 3) {
-          final params = Get.parameters;
-          final t = '${(my ?? params['my'] ?? -1)}';
+        final params = Get.parameters;
+        final t = '${(my ?? params['my'] ?? -1)}';
 
+        if (moderate.isEditable) {
           if (t == '0') {
             Get.toNamed('/add_recipe', parameters: {'id': news.id})?.then((_) {
               Get.parameters = params;
-              callback != null ? callback!() : null;
+              callback?.call();
             });
             return;
           } else if (t == '1') {
             Get.toNamed('/add_news', parameters: {'id': news.id})?.then((_) {
               Get.parameters = params;
-              callback != null ? callback!() : null;
+              callback?.call();
             });
             return;
           }
@@ -45,7 +46,7 @@ class NewsCard extends StatelessWidget {
 
         Get.delete<NewsController>();
         Get.put(NewsController(news.id, recipe ?? false, survey ?? false));
-        Get.to(() => NewsView(), preventDuplicates: false)?.then((_) => callback != null ? callback!() : null);
+        Get.to(() => NewsView(), preventDuplicates: false)?.then((_) => callback?.call());
       },
       child: Container(
           margin: EdgeInsets.symmetric(horizontal: 8),
@@ -116,20 +117,20 @@ class NewsCard extends StatelessWidget {
                         minimumSize: Size(double.infinity, 40)
                     ),
                     onPressed: () {
-                      if (moderate == 0 || moderate == 3) {
-                        final params = Get.parameters;
-                        final t = '${(my ?? params['my'] ?? -1)}';
+                      final params = Get.parameters;
+                      final t = '${(my ?? params['my'] ?? -1)}';
 
+                      if (moderate.isEditable) {
                         if (t == '0') {
                           Get.toNamed('/add_recipe', parameters: {'id': news.id})?.then((_) {
                             Get.parameters = params;
-                            callback != null ? callback!() : null;
+                            callback?.call();
                           });
                           return;
                         } else if (t == '1') {
                           Get.toNamed('/add_news', parameters: {'id': news.id})?.then((_) {
                             Get.parameters = params;
-                            callback != null ? callback!() : null;
+                            callback?.call();
                           });
                           return;
                         }
@@ -137,7 +138,7 @@ class NewsCard extends StatelessWidget {
 
                       Get.delete<NewsController>();
                       Get.put(NewsController(news.id, recipe ?? false, survey ?? false));
-                      Get.to(() => NewsView())?.then((_) => callback != null ? callback!() : null);
+                      Get.to(() => NewsView())?.then((_) => callback?.call());
                     },
                     child: Text('Читать', style: TextStyle(fontSize: 14, color: Colors.white))
                 )

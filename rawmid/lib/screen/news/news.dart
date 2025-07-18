@@ -8,8 +8,8 @@ import 'package:share_plus/share_plus.dart';
 import '../../controller/news.dart';
 import '../../utils/constant.dart';
 import '../../widget/h.dart';
-import '../../widget/primary_button.dart';
-import '../../widget/search.dart';
+// import '../../widget/primary_button.dart';
+// import '../../widget/search.dart';
 import '../../widget/search_bar.dart';
 import '../../widget/w.dart';
 import '../home/shop.dart';
@@ -439,20 +439,20 @@ class NewsView extends StatelessWidget {
                             ]
                         )
                     ),
-                    if (controller.isLoading.value) SearchWidget(),
-                    if (!controller.isLoading.value) Center(child: CircularProgressIndicator(color: primaryColor)),
-                    if (controller.isLoading.value) Positioned(
-                        bottom: 10 + MediaQuery.of(context).viewPadding.bottom,
-                        left: 20,
-                        right: 20,
-                        child: PrimaryButton(text: 'Все ${controller.recipe ? 'рецепты' : 'статьи'}', height: 40, background: Colors.white, borderColor: primaryColor, borderWidth: 2, textStyle: TextStyle(color: primaryColor, fontWeight: FontWeight.w700), onPressed: () {
-                          if (controller.recipe) {
-                            Get.toNamed('/blog', arguments: true);
-                          } else {
-                            Get.toNamed('/blog');
-                          }
-                        })
-                    )
+                    // if (controller.isLoading.value) SearchWidget(),
+                    // if (!controller.isLoading.value) Center(child: CircularProgressIndicator(color: primaryColor)),
+                    // if (controller.isLoading.value) Positioned(
+                    //     bottom: 10 + MediaQuery.of(context).viewPadding.bottom,
+                    //     left: 20,
+                    //     right: 20,
+                    //     child: PrimaryButton(text: 'Все ${controller.recipe ? 'рецепты' : 'статьи'}', height: 40, background: Colors.white, borderColor: primaryColor, borderWidth: 2, textStyle: TextStyle(color: primaryColor, fontWeight: FontWeight.w700), onPressed: () {
+                    //       if (controller.recipe) {
+                    //         Get.toNamed('/blog', arguments: true);
+                    //       } else {
+                    //         Get.toNamed('/blog');
+                    //       }
+                    //     })
+                    // )
                   ]
               );
             })
