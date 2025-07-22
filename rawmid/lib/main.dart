@@ -81,12 +81,14 @@ class App extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate
         ],
         builder: (context, child) {
-          final size = MediaQuery.of(context).size;
+          final mediaQuery = MediaQuery.of(context);
+
+          final size = mediaQuery.size;
           final width = size.width;
           final height = size.height;
 
           final tabBarHeight = 56.0;
-          final bottomPadding = MediaQuery.of(context).padding.bottom;
+          final bottomPadding = mediaQuery.padding.bottom;
           final tabBarTotalHeight = tabBarHeight + bottomPadding;
 
           final mobileWidth = 380.0;
@@ -98,28 +100,33 @@ class App extends StatelessWidget {
           final scale = scaleWidth < scaleHeight ? scaleWidth : scaleHeight;
 
           final other = Center(
-              child: Transform.scale(
-                  scale: scale,
-                  child: SizedBox(
-                      width: mobileWidth,
-                      height: mobileHeight,
-                      child: child
-                  )
-              )
+            child: Transform.scale(
+              scale: scale,
+              child: SizedBox(
+                width: mobileWidth,
+                height: mobileHeight,
+                child: child,
+              ),
+            ),
           );
 
-          return ResponsiveBuilder(
-              builder: (context, sizingInformation) {
-                if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
-                  return other;
-                }
-
-                if (sizingInformation.deviceScreenType == DeviceScreenType.tablet) {
-                  return other;
-                }
-
-                return child!;
+          final scaledUI = ResponsiveBuilder(
+            builder: (context, sizingInformation) {
+              if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
+                return other;
               }
+
+              if (sizingInformation.deviceScreenType == DeviceScreenType.tablet) {
+                return other;
+              }
+
+              return child!;
+            },
+          );
+
+          return MediaQuery(
+            data: mediaQuery.copyWith(textScaleFactor: 1.0),
+            child: scaledUI,
           );
         },
         theme: theme,
