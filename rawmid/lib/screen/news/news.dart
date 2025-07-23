@@ -270,7 +270,9 @@ class NewsView extends StatelessWidget {
                                                     }
                                                 )
                                             ),
-                                            if (news.ingredients != null || news.energy != null) Padding(
+                                            if ((news.ingredients ?? []).isNotEmpty || 
+                                              (news.energy ?? []).isNotEmpty || 
+                                              (news.steps ?? []).isNotEmpty) Padding(
                                                 padding: EdgeInsets.symmetric(horizontal: 20),
                                                 child: Column(
                                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -334,15 +336,15 @@ class NewsView extends StatelessWidget {
                                                       ),
                                                       h(20),
                                                       if (news.steps != null) Text(
-                                                          'Рецепт',
+                                                          controller.recipe ? 'Рецепт' : 'Обзор',
                                                           style: TextStyle(
                                                               color: Color(0xFF1E1E1E),
                                                               fontSize: 20,
                                                               fontWeight: FontWeight.w700
                                                           )
                                                       ),
-                                                      if (news.steps != null) h(20),
-                                                      if (news.steps != null) Column(
+                                                      if ((news.steps ?? []).isNotEmpty) h(20),
+                                                      if ((news.steps ?? []).isNotEmpty) Column(
                                                           spacing: 20,
                                                           children: List.generate(news.steps!.length, (index) {
                                                             final item = news.steps![index];
@@ -425,7 +427,7 @@ class NewsView extends StatelessWidget {
                                                     ]
                                                 )
                                             ),
-                                            if ((news.products ?? []).isNotEmpty) StoreSection(title: 'Товары рецепта', products: news.products!, addWishlist: controller.addWishlist, buy: (id) async {
+                                            if ((news.products ?? []).isNotEmpty) StoreSection(title: controller.recipe ? 'Товары рецепта' : 'Товары обзора', products: news.products!, addWishlist: controller.addWishlist, buy: (id) async {
                                               await controller.main.addCart(id);
                                               controller.update();
                                             }),

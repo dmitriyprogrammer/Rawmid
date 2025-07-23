@@ -10,7 +10,8 @@ class NewsController extends GetxController {
   String id;
   bool recipe;
   bool survey;
-  NewsController(this.id, this.recipe, this.survey);
+  bool full;
+  NewsController(this.id, this.recipe, this.survey, {this.full = false});
   final main = Get.find<NavigationController>();
   RxList<String> wishlist = (Helper.prefs.getStringList('wishlist') ?? <String>[]).obs;
 
@@ -30,7 +31,8 @@ class NewsController extends GetxController {
       await HomeApi.changeCity(fId);
     }
 
-    news.value = await BlogApi.getNew(id, recipe, survey);
+    news.value = await BlogApi.getNew(id, recipe, survey, full: full);
+
     isLoading.value = true;
   }
 

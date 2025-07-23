@@ -25,12 +25,17 @@ class BlogApi {
     return {};
   }
 
-  static Future<NewsModel?> getNew(String id, bool recipe, bool survey) async {
+  static Future<NewsModel?> getNew(String id, bool recipe, bool survey, {bool full = false}) async {
     try {
       final response = await http.post(Uri.parse(getNewUrl), headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
-      }, body: {'id': id, 'recipe': '${recipe ? 1 : 0}', 'survey': '${survey ? 1 : 0}'});
+      }, body: {
+        'id': id,
+        'recipe': '${recipe ? 1 : 0}',
+        'survey': '${survey ? 1 : 0}',
+        if (full) 'full': '1'
+      });
       final json = jsonDecode(response.body);
 
       if (json['record'] != null) {

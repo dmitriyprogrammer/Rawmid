@@ -42,6 +42,18 @@ class NewsCard extends StatelessWidget {
             });
             return;
           }
+        } else if(moderate.isReadonly) {
+          if (t == '0') {
+            Get.delete<NewsController>();
+            Get.put(NewsController(news.id, true, false));
+            Get.to(() => NewsView(), preventDuplicates: false)?.then((_) => callback?.call());
+            return;
+          } else if (t == '1') {
+            Get.delete<NewsController>();
+            Get.put(NewsController(news.id, false, true, full: true));
+            Get.to(() => NewsView(), preventDuplicates: false)?.then((_) => callback?.call());
+            return;
+          }
         }
 
         Get.delete<NewsController>();
@@ -132,6 +144,18 @@ class NewsCard extends StatelessWidget {
                             Get.parameters = params;
                             callback?.call();
                           });
+                          return;
+                        }
+                      } else if(moderate.isReadonly) {
+                        if (t == '0') {
+                          Get.delete<NewsController>();
+                          Get.put(NewsController(news.id, true, false));
+                          Get.to(() => NewsView(), preventDuplicates: false)?.then((_) => callback?.call());
+                          return;
+                        } else if (t == '1') {
+                          Get.delete<NewsController>();
+                          Get.put(NewsController(news.id, false, true, full: true));
+                          Get.to(() => NewsView(), preventDuplicates: false)?.then((_) => callback?.call());
                           return;
                         }
                       }
