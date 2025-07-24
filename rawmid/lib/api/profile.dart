@@ -95,7 +95,7 @@ class ProfileApi {
       request.fields['body'] = jsonEncode(body);
 
       final response = await request.send();
-      final json = Helper.safeJson(await response.stream.bytesToString());
+      final json = jsonDecode(await response.stream.bytesToString());
       return '${json?['id'] ?? ''}';
     } catch (e) {
       debugPrint(e.toString());
@@ -141,7 +141,7 @@ class ProfileApi {
       request.fields['body'] = jsonEncode(body);
 
       final response = await request.send();
-      final json = Helper.safeJson(await response.stream.bytesToString());
+      final json = jsonDecode(await response.stream.bytesToString());
       return '${json?['id'] ?? ''}';
     } catch (e) {
       debugPrint(e.toString());

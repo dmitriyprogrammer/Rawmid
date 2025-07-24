@@ -17,7 +17,7 @@ class ProductApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'product_id': id});
 
-      final json = Helper.safeJson(response.body);
+      final json = jsonDecode(response.body);
 
       if (json != null && json['message'] != null) {
         Helper.snackBar(error: true, text: json['message']);
@@ -64,7 +64,7 @@ class ProductApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'product_id': id});
-      final json = Helper.safeJson(response.body);
+      final json = jsonDecode(response.body);
 
       if (json != null && json['message'] != null) {
         Helper.snackBar(error: true, text: json['message']);
@@ -91,7 +91,7 @@ class ProductApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'product_id': id});
-      final json = Helper.safeJson(response.body);
+      final json = jsonDecode(response.body);
 
       if (json != null && json['message'] != null && mes) {
         Helper.snackBar(error: true, text: json['message']);
