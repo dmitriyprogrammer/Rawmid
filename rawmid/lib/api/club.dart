@@ -12,7 +12,7 @@ class ClubApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
       return json;
     } catch (e) {
       debugPrint(e.toString());
@@ -27,7 +27,7 @@ class ClubApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
       return ClubModel.fromJson(json['club']);
     } catch (e) {
       debugPrint(e.toString());

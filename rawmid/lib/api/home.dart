@@ -22,7 +22,7 @@ class HomeApi {
       final response = await http.get(Uri.parse('http://ip-api.com/json/?lang=ru'));
 
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
+        final data = Helper.safeJson(response.body);
 
         if (data['city'] != null) {
           await http.post(Uri.parse(changeRegionUrl), headers: {
@@ -47,7 +47,7 @@ class HomeApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'city': city});
-      final data = jsonDecode(response.body);
+      final data = Helper.safeJson(response.body);
 
       if (data['code'] != null) {
         return data;
@@ -65,7 +65,7 @@ class HomeApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'fias_id': '$fId'});
-      final data = jsonDecode(response.body);
+      final data = Helper.safeJson(response.body);
 
       if (data['code'] != null) {
         return data;
@@ -103,7 +103,7 @@ class HomeApi {
       );
 
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
+        final data = Helper.safeJson(response.body);
         final suggestions = data['suggestions'] as List;
         return suggestions.map((item) => item['value'] as String).toList();
       }
@@ -141,7 +141,7 @@ class HomeApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: body);
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['banners'] != null) {
         for (var i in json['banners']) {
@@ -161,7 +161,7 @@ class HomeApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'query': query});
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['search'] != null) {
         return SearchModel.fromJson(json['search']);
@@ -195,7 +195,7 @@ class HomeApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'token': token, 'app': Platform.isAndroid ? 'android' : 'apple'});
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       return json['success'] ?? false;
     } catch (e) {
@@ -213,7 +213,7 @@ class HomeApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['ranks'] != null) {
         for (var i in json['ranks']) {
@@ -235,7 +235,7 @@ class HomeApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['products'] != null) {
         for (var i in json['products']) {
@@ -257,7 +257,7 @@ class HomeApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['ids'] != null) {
         for (var i in json['ids']) {
@@ -279,7 +279,7 @@ class HomeApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['sernums'] != null) {
         for (var i in json['sernums']) {
@@ -299,7 +299,7 @@ class HomeApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
       return ContactMapData.fromJson(json);
     } catch (e) {
       debugPrint(e.toString());
@@ -316,7 +316,7 @@ class HomeApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['products'] != null) {
         for (var i in json['products']) {
@@ -339,7 +339,7 @@ class HomeApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: body);
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['products'] != null) {
         for (var i in json['products']) {
@@ -359,7 +359,7 @@ class HomeApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: body);
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if ((json['error'] ?? '').isEmpty) {
         return true;
@@ -379,7 +379,7 @@ class HomeApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: body);
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if ((json['warranty'] ?? '').isNotEmpty) {
         return '${json['warranty']}';
@@ -401,7 +401,7 @@ class HomeApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'pids': pids.join(',')});
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['products'] != null) {
         for (var i in json['products']) {
@@ -423,7 +423,7 @@ class HomeApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['records'] != null) {
         for (var i in json['records']) {
@@ -445,7 +445,7 @@ class HomeApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['news'] != null) {
         for (var i in json['news']) {
@@ -467,7 +467,7 @@ class HomeApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['news'] != null) {
         for (var i in json['news']) {

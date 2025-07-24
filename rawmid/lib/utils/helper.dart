@@ -545,4 +545,24 @@ class Helper {
     "ZM": IsoCode.ZM,
     "ZW": IsoCode.ZW,
   };
+
+  static String cleanJson(String input) {
+    final start = input.indexOf('{');
+    final end = input.lastIndexOf('}');
+    if (start != -1 && end != -1 && end > start) {
+      return input.substring(start, end + 1);
+    }
+    return '{}';
+  }
+
+  static Map<String, dynamic> safeJson(String input) {
+    try {
+      final cleaned = cleanJson(input);
+      return jsonDecode(cleaned);
+    } catch (e) {
+      debugPrint('❌ JSON parse error: $e');
+      return {};
+    }
+  }
+
 }

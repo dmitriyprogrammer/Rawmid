@@ -13,7 +13,7 @@ class BlogApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if ((json['blog']?['news'] ?? []).isNotEmpty) {
         return json;
@@ -36,7 +36,7 @@ class BlogApi {
         'survey': '${survey ? 1 : 0}',
         if (full) 'full': '1'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['record'] != null) {
         return NewsModel.fromJson(json['record']);
@@ -56,7 +56,7 @@ class BlogApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['categories'] != null) {
         for (var i in json['categories']) {

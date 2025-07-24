@@ -14,7 +14,7 @@ class OrderApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['orders'] != null) {
         for (var i in json['orders']) {
@@ -34,7 +34,7 @@ class OrderApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'id': '$id'});
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['order'] != null) {
         return OrdersModel.fromJson(json['order']);
@@ -52,7 +52,7 @@ class OrderApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'id': id});
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
       return json['success'] ?? false;
     } catch (e) {
       debugPrint(e.toString());

@@ -14,7 +14,7 @@ class WishlistApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'wishlist': wishlist});
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['wishlist'] != null) {
         for (var i in json['wishlist']) {

@@ -13,7 +13,7 @@ class CompareApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'ids': ids});
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['products'] != null) {
         return json;

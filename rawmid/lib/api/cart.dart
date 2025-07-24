@@ -15,7 +15,7 @@ class CartApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['products'] != null) {
         for (var i in json['products']) {
@@ -38,7 +38,7 @@ class CartApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['wishlist'] != null) {
         for (var i in json['wishlist']) {
@@ -69,7 +69,7 @@ class CartApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'product_id': id});
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       return json['check'] ?? false;
     } catch (e) {
@@ -87,7 +87,7 @@ class CartApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: body);
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['message'] != null) {
         Helper.snackBar(error: true, text: json['message']);
@@ -125,7 +125,7 @@ class CartApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: body);
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['message'] != null) {
         Helper.snackBar(error: true, text: json['message']);

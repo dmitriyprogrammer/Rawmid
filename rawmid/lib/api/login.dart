@@ -12,7 +12,7 @@ class LoginApi {
         'Content-Type': 'application/x-www-form-urlencoded'
       }, body: body);
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['user'] != null) {
         await Helper.prefs.setString('PHPSESSID', json['session_id']);
@@ -34,7 +34,7 @@ class LoginApi {
           body: body
       );
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['user'] != null) {
         await Helper.prefs.setString('PHPSESSID', json['session_id']);
@@ -63,7 +63,7 @@ class LoginApi {
       );
 
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
+        final data = Helper.safeJson(response.body);
         return data['suggestions'].isNotEmpty;
       }
     } catch (e) {
@@ -80,7 +80,7 @@ class LoginApi {
           body: body
       );
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['user'] != null) {
         await Helper.prefs.setString('PHPSESSID', json['session_id']);
@@ -101,7 +101,7 @@ class LoginApi {
       final response = await http.post(Uri.parse(sendCodeUrl), headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }, body: {'email': email});
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
       return json['status'] ?? false;
     } catch (e) {
       debugPrint(e.toString());

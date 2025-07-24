@@ -17,7 +17,7 @@ class CatalogApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['categories'] != null) {
         for (var i in json['categories']) {
@@ -39,7 +39,7 @@ class CatalogApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['specials'] != null) {
         for (var i in json['specials']) {
@@ -61,7 +61,7 @@ class CatalogApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['banners'] != null) {
         for (var i in json['banners']) {
@@ -81,7 +81,7 @@ class CatalogApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: body);
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       return CategoryItemModel.fromJson(json);
     } catch (e) {
@@ -99,7 +99,7 @@ class CatalogApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: jsonEncode(body));
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['products'] != null) {
         List<ProductModel> items = [];
@@ -123,7 +123,7 @@ class CatalogApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: jsonEncode(body));
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['products'] != null) {
         return json;

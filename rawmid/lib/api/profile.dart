@@ -21,7 +21,7 @@ class ProfileApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['user'] != null) {
         return ProfileModel.fromJson(json['user']);
@@ -40,7 +40,7 @@ class ProfileApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
       return EditRecipeModel.fromJson(json);
     } catch (e) {
       debugPrint(e.toString());
@@ -56,7 +56,7 @@ class ProfileApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
       return EditSurveyModel.fromJson(json['survey']);
     } catch (e) {
       debugPrint(e.toString());
@@ -95,7 +95,7 @@ class ProfileApi {
       request.fields['body'] = jsonEncode(body);
 
       final response = await request.send();
-      final json = jsonDecode(await response.stream.bytesToString());
+      final json = Helper.safeJson(await response.stream.bytesToString());
       return '${json?['id'] ?? ''}';
     } catch (e) {
       debugPrint(e.toString());
@@ -141,7 +141,7 @@ class ProfileApi {
       request.fields['body'] = jsonEncode(body);
 
       final response = await request.send();
-      final json = jsonDecode(await response.stream.bytesToString());
+      final json = Helper.safeJson(await response.stream.bytesToString());
       return '${json?['id'] ?? ''}';
     } catch (e) {
       debugPrint(e.toString());
@@ -159,7 +159,7 @@ class ProfileApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['countries'] != null) {
         for (var i in json['countries']) {
@@ -184,7 +184,7 @@ class ProfileApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['rewards'] != null) {
         for (var i in json['rewards']) {
@@ -209,7 +209,7 @@ class ProfileApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['questions'] != null) {
         for (var i in json['questions']) {
@@ -244,7 +244,7 @@ class ProfileApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
       return json['status'] ?? false;
     } catch (e) {
       debugPrint(e.toString());
@@ -259,7 +259,7 @@ class ProfileApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'password': password});
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
       return json['status'] ?? false;
     } catch (e) {
       debugPrint(e.toString());
@@ -274,7 +274,7 @@ class ProfileApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: body);
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['message'] != null) {
         Helper.snackBar(error: true, text: json['message']);
@@ -297,7 +297,7 @@ class ProfileApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'id': id});
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['message'] != null) {
         Helper.snackBar(error: true, text: json['message']);
@@ -321,7 +321,7 @@ class ProfileApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'address_id': '$id'});
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['message'] != null) {
         Helper.snackBar(error: true, text: json['message']);
@@ -344,7 +344,7 @@ class ProfileApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'newsletter': '${val ? 1 : 0}'});
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
       return json['status'] ?? false;
     } catch (e) {
       debugPrint(e.toString());
@@ -359,7 +359,7 @@ class ProfileApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: {'push': '${val ? 1 : 0}'});
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
       return json['status'] ?? false;
     } catch (e) {
       debugPrint(e.toString());
@@ -375,7 +375,7 @@ class ProfileApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: body);
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['user'] != null) {
         return ProfileModel.fromJson(json['user']);
@@ -396,7 +396,7 @@ class ProfileApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['products'] != null) {
         for (var i in json['products']) {
@@ -435,7 +435,7 @@ class ProfileApi {
       });
 
       final response = await request.send();
-      final json = jsonDecode(await response.stream.bytesToString());
+      final json = Helper.safeJson(await response.stream.bytesToString());
 
       if (json['message'] != null) {
         Helper.snackBar(error: true, text: json['message']);
@@ -465,7 +465,7 @@ class ProfileApi {
       });
 
       final response = await request.send();
-      final json = jsonDecode(await response.stream.bytesToString());
+      final json = Helper.safeJson(await response.stream.bytesToString());
 
       if (json['message'] != null) {
         Helper.snackBar(error: true, text: json['message']);

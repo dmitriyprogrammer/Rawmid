@@ -19,7 +19,7 @@ class CheckoutApi {
         'Content-Type': 'application/json',
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['products'] != null) {
         for (var i in json['products']) {
@@ -40,7 +40,7 @@ class CheckoutApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['error'] != null) {
         Helper.snackBar(error: true, text: json['error']);
@@ -97,7 +97,7 @@ class CheckoutApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['om']['features'] != null) {
         for (var i in json['om']['features']) {
@@ -118,7 +118,7 @@ class CheckoutApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: body);
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['error'] != null) {
         Helper.snackBar(error: true, text: json['error']);
@@ -142,7 +142,7 @@ class CheckoutApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: jsonEncode(body));
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['error'] != null) {
         Helper.snackBar(error: true, text: json['error']);
@@ -165,7 +165,7 @@ class CheckoutApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       }, body: jsonEncode(body));
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       if (json['error'] != null) {
         Helper.snackBar(error: true, text: json['error']);
@@ -188,7 +188,7 @@ class CheckoutApi {
         'Cookie': 'PHPSESSID=${Helper.prefs.getString('PHPSESSID')}'
       });
 
-      final json = jsonDecode(response.body);
+      final json = Helper.safeJson(response.body);
 
       return BbLocationModel.fromJson(json);
     } catch (e) {
