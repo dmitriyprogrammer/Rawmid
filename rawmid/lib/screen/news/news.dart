@@ -413,13 +413,20 @@ class NewsView extends StatelessWidget {
                                                                       ]
                                                                   ),
                                                                   if (item.text != null) h(20),
-                                                                  if (item.text != null) Text(
-                                                                      item.text!,
-                                                                      style: TextStyle(
+                                                                  if (item.text != null)
+                                                                    Padding(
+                                                                      padding: EdgeInsets.symmetric(horizontal: 20),
+                                                                      child: Text(
+                                                                        item.text!,
+                                                                        textAlign: TextAlign.justify,
+                                                                        style: TextStyle(
                                                                           color: Color(0xFF1E1E1E),
-                                                                          fontSize: 14
-                                                                      )
-                                                                  )
+                                                                          fontSize: 14,
+                                                                          height: 1.5,
+                                                                        ),
+                                                                      ),
+                                                                    )
+
                                                                 ]
                                                             );
                                                           })
