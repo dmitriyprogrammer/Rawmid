@@ -147,13 +147,15 @@ class NewsModel {
 }
 
 class Steps {
+  String? title;
   String? text;
   String? image1;
   String? image2;
 
-  Steps({this.text, this.image1, this.image2});
+  Steps({this.title, this.text, this.image1, this.image2});
 
   Steps.fromJson(Map<String, dynamic> json) {
+    title = json['title'];
     text = json['text'];
     image1 = json['image1'];
     image2 = json['image2'];
@@ -161,6 +163,7 @@ class Steps {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['title'] = title;
     data['text'] = text;
     data['image1'] = image1;
     data['image2'] = image2;

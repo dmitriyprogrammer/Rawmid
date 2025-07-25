@@ -335,6 +335,36 @@ class NewsView extends StatelessWidget {
                                                           }).toList()
                                                       ),
                                                       h(20),
+                                                      if ((news.steps ?? []).isNotEmpty)
+                                                        Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Text(
+                                                              'Оглавление:',
+                                                              style: TextStyle(
+                                                                fontSize: 18,
+                                                                fontWeight: FontWeight.bold,
+                                                              ),
+                                                            ),
+                                                            h(10),
+                                                            ...news.steps!
+                                                                .asMap()
+                                                                .entries
+                                                                .where((entry) => (entry.value.title ?? '').isNotEmpty)
+                                                                .map((entry) {
+                                                                  final index = entry.key + 1;
+                                                                  final step = entry.value;
+                                                                  return Padding(
+                                                                    padding: const EdgeInsets.only(bottom: 6),
+                                                                    child: Text(
+                                                                      '$index. ${step.title}',
+                                                                      style: TextStyle(fontSize: 14, color: Colors.black87),
+                                                                    ),
+                                                                  );
+                                                                })
+                                                                .toList()
+                                                          ],
+                                                        ),
                                                       if (news.steps != null) Text(
                                                           controller.recipe ? 'Рецепт' : 'Обзор',
                                                           style: TextStyle(
