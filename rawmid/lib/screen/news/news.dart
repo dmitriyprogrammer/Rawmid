@@ -73,7 +73,13 @@ class NewsView extends StatelessWidget {
                                   )
                               ),
                               Expanded(
-                                  child: controller.news.value == null || controller.news.value!.text.isEmpty
+                                  child: controller.news.value == null || (
+                                    (controller.news.value!.text.isEmpty) &&
+                                    (controller.news.value!.steps?.isEmpty ?? true) &&
+                                    (controller.news.value!.ingredients?.isEmpty ?? true) &&
+                                    (controller.news.value!.energy?.isEmpty ?? true) &&
+                                    (controller.news.value!.products?.isEmpty ?? true)
+                                  )
                                     ? Center(child: Text('Статья не найдена!'))
                                     : SingleChildScrollView(
                                         child: Column(
