@@ -47,7 +47,11 @@ class NewsView extends StatelessWidget {
             bottom: false,
             child: Obx(() {
               final news = controller.news.value;
-
+              
+              if (news == null) {
+                return const SizedBox();
+              }
+              controller.initStepKeys(news.steps?.length ?? 0);
               return Stack(
                   alignment: Alignment.center,
                   children: [
@@ -69,8 +73,10 @@ class NewsView extends StatelessWidget {
                                   )
                               ),
                               Expanded(
-                                  child: news != null ? SingleChildScrollView(
-                                      child: Column(
+                                  child: controller.news.value == null || controller.news.value!.text.isEmpty
+                                    ? Center(child: Text('Статья не найдена!'))
+                                    : SingleChildScrollView(
+                                        child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             h(20),
@@ -356,10 +362,26 @@ class NewsView extends StatelessWidget {
                                                                   final step = entry.value;
                                                                   return Padding(
                                                                     padding: const EdgeInsets.only(bottom: 6),
-                                                                    child: Text(
-                                                                      '$index. ${step.title}',
-                                                                      style: TextStyle(fontSize: 14, color: Colors.black87),
-                                                                    ),
+                                                                    child: GestureDetector(
+                                                                      onTap: () {
+                                                                        final key = controller.stepKeys[entry.key];
+                                                                        if (key.currentContext != null) {
+                                                                          Scrollable.ensureVisible(
+                                                                            key.currentContext!,
+                                                                            duration: Duration(milliseconds: 300),
+                                                                            curve: Curves.easeInOut,
+                                                                          );
+                                                                        }
+                                                                      },
+                                                                      child: Text(
+                                                                        '$index. ${step.title}',
+                                                                        style: TextStyle(
+                                                                          fontSize: 14,
+                                                                          color: Colors.blue,
+                                                                          decoration: TextDecoration.underline,
+                                                                        ),
+                                                                      ),
+                                                                    )
                                                                   );
                                                                 })
                                                                 .toList()
@@ -379,7 +401,9 @@ class NewsView extends StatelessWidget {
                                                           children: List.generate(news.steps!.length, (index) {
                                                             final item = news.steps![index];
 
-                                                            return Column(
+                                                            return KeyedSubtree(
+                                                              key: controller.stepKeys[index],
+                                                              child: Column(
                                                                 children: [
                                                                   Row(
                                                                       spacing: 15,
@@ -458,6 +482,7 @@ class NewsView extends StatelessWidget {
                                                                     )
 
                                                                 ]
+                                                              ),
                                                             );
                                                           })
                                                       ),
@@ -471,8 +496,6 @@ class NewsView extends StatelessWidget {
                                             h(20)
                                           ]
                                       )
-                                  ) : Center(
-                                      child: Text('Статья не найдена!')
                                   )
                               )
                             ]

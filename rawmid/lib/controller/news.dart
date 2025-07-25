@@ -5,15 +5,24 @@ import 'package:rawmid/model/home/news.dart';
 import '../api/cart.dart';
 import '../api/home.dart';
 import '../utils/helper.dart';
+import 'package:flutter/material.dart';
 
 class NewsController extends GetxController {
   String id;
   bool recipe;
   bool survey;
   bool full;
+  final List<GlobalKey> stepKeys = [];
   NewsController(this.id, this.recipe, this.survey, {this.full = false});
   final main = Get.find<NavigationController>();
   RxList<String> wishlist = (Helper.prefs.getStringList('wishlist') ?? <String>[]).obs;
+
+  void initStepKeys(int count) {
+    if (stepKeys.length != count) {
+      stepKeys.clear();
+      stepKeys.addAll(List.generate(count, (_) => GlobalKey()));
+    }
+  }
 
   @override
   void onInit() {
