@@ -347,7 +347,7 @@ class NewsView extends StatelessWidget {
                                                           }).toList()
                                                       ),
                                                       h(20),
-                                                      if ((news.steps ?? []).isNotEmpty)
+                                                      if (controller.survey && (news.steps ?? []).isNotEmpty)
                                                         Column(
                                                           crossAxisAlignment: CrossAxisAlignment.start,
                                                           children: [
