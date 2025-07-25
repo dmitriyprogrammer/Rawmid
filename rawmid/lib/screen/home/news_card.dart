@@ -161,7 +161,7 @@ class NewsCard extends StatelessWidget {
                       }
 
                       Get.delete<NewsController>();
-                      Get.put(NewsController(news.id, recipe ?? false, survey ?? false));
+                      Get.put(NewsController(news.id, recipe ?? false, survey ?? false, full: true));
                       Get.to(() => NewsView())?.then((_) => callback?.call());
                     },
                     child: Text('Читать', style: TextStyle(fontSize: 14, color: Colors.white))
