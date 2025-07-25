@@ -417,7 +417,7 @@ class NavigationController extends GetxController {
     user.value = null;
     // cartProducts.clear(); // Для тестового запуска.  TODO добавить пересборку корзины на Quest
     if (Get.isRegistered<CartController>()) {
-      Get.find<CartController>().cartProducts.clear();
+      // Get.find<CartController>().cartProducts.clear();
     }
     // await Helper.prefs.setString('PHPSESSID', ''); // Для тестового запуска. TODO добавить пересборку сессии на Quest
     if (Get.isRegistered<HomeController>()) {
