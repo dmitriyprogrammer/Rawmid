@@ -415,11 +415,11 @@ class NavigationController extends GetxController {
   Future logout() async {
     ProfileApi.logout();
     user.value = null;
-    cartProducts.clear();
+    // cartProducts.clear(); // Для тестового запуска.  TODO добавить пересборку корзины на Quest
     if (Get.isRegistered<CartController>()) {
       Get.find<CartController>().cartProducts.clear();
     }
-    await Helper.prefs.setString('PHPSESSID', '');
+    // await Helper.prefs.setString('PHPSESSID', ''); // Для тестового запуска. TODO добавить пересборку сессии на Quest
     if (Get.isRegistered<HomeController>()) {
       final home = Get.find<HomeController>();
       home.initialize();
