@@ -239,25 +239,39 @@ class BlogView extends StatelessWidget {
                                               )
                                           ),
                                           if (controller.featured.length > 1 && controller.id.isEmpty) h(16),
-                                          if (controller.featured.length > 1 && controller.id.isEmpty) Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: List.generate(controller.featured.length, (index) => GestureDetector(
-                                                  onTap: () async {
-                                                    await controller.pageController.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
-
-                                                    controller.activeIndex.value = index;
-                                                  },
-                                                  child: Container(
-                                                      width: 10,
-                                                      height: 10,
-                                                      margin: EdgeInsets.symmetric(horizontal: 4),
-                                                      decoration: BoxDecoration(
-                                                          color: controller.activeIndex.value == index ? Colors.blue : Color(0xFF00ADEE).withOpacityX(0.2),
-                                                          shape: BoxShape.circle
-                                                      )
-                                                  )
-                                              ))
-                                          ),
+                                          if (controller.featured.length > 1 && controller.id.isEmpty)
+                                            Obx(() => Column(
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: List.generate(
+                                                        controller.featured.length,
+                                                        (index) => GestureDetector(
+                                                          onTap: () async {
+                                                            await controller.pageController.animateToPage(
+                                                              index,
+                                                              duration: const Duration(milliseconds: 300),
+                                                              curve: Curves.easeInOut,
+                                                            );
+                                                            controller.activeIndex.value = index;
+                                                          },
+                                                          child: Container(
+                                                            width: 10,
+                                                            height: 10,
+                                                            margin: const EdgeInsets.symmetric(horizontal: 4),
+                                                            decoration: BoxDecoration(
+                                                              shape: BoxShape.circle,
+                                                              color: controller.activeIndex.value == index
+                                                                  ? Colors.blue
+                                                                  : const Color(0xFF00ADEE).withOpacity(0.2),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(height: 16),
+                                                  ],
+                                                )),
                                           if (controller.featured.isNotEmpty && controller.id.isEmpty) h(30)
                                         ]
                                     );
